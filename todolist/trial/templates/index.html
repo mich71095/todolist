@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<p>asdf<br>iyghu,kyguky</p>
+
+
+
+{% if user.is_authenticated %}
+<div class=" container main">
+	<p>not login</p>
+
+</div>
+{% else %}
+<div class="container main">
+	<div class=" ">
+
+		<div class="col-md-12"  class="">
+
+			<h3 class="text-center">Log-in</h3>
+
+
+			{% if login_form.errors %}
+			<p>Your username and password didn't match. Please try again.</p>
+			{% endif %}
+
+			<form method="POST" action="">{% csrf_token %}
+				<div class="text-center"><p>{{ login_form.email }}</p></div>
+				<div class="text-center"><p>{{ login_form.password1 }}</p></div>
+				<div class="col-md-12 text-center ">
+					<button type="submit" name="loginbtn" class="btn btn-default " >Log-in</button>
+				</div>
+			</form>
+
+		</div>
+
+
+	</div>
+
+
+
+	<div class="col-md-12 text-center"><h1>OR</h1></div>
+
+
+	<div class=""><hr>
+		<div class="col-md-12">
+			<h3 class="text-center">Create an Account</h3>
+			<form method="post"  role="form">{% csrf_token %}
+				{% for field in user_non_admin_form %}
+				<div class="text-center ">
+					<p>{{ field }}</p>
+					{% for error in field.errors %}
+					<p style="color:red">{{ error }}</p>
+					{% endfor %}
+				</div>
+				{% endfor %} 
+				
+				<div class="col-md-12 text-center">
+					<button type="submit" name="regbtn" class="btn btn-default  " >Register Account</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+</div>
+{% endif %}
+
+{% endblock %}
